@@ -1,0 +1,20 @@
+{
+  "name": "web-framework",
+  "version": "1.0.0",
+  "description": "Building a mini web-framework with typescript",
+  "main": "index.js",
+  "scripts": {
+    "start:parcel": "parcel index.html",
+    "start:db": "json-server -w db.json"
+  },
+  "author": "Umer Kang",
+  "license": "ISC",
+  "devDependencies": {
+    "json-server": "^0.17.0",
+    "parcel": "^2.3.2",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "axios": "^0.26.1"
+  }
+}
