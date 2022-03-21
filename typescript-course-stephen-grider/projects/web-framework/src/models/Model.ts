@@ -25,23 +25,17 @@ export class Model<T extends HasId> {
   constructor(
     // Wire up the static dependencies of User class, we also don't need to create interface
 
+    // If we are assigning the properties using the modified syntax, not in the constructor function, these occur before the constructor function, SO we can write the shorten delegation method syntax
     private attributes: ModelAttributes<T>,
     private events: Events,
     private sync: SyncInterface<T>
   ) {}
 
   // Delegation methods, delegate behavior to related classes
-  public get on() {
-    return this.events.on;
-  }
-
-  public get trigger() {
-    return this.events.trigger;
-  }
-
-  public get get() {
-    return this.attributes.get;
-  }
+  // This only runs if properties of this class has been created by modifier syntax
+  public on = this.events.on;
+  public trigger = this.events.trigger;
+  public get = this.attributes.get;
 
   // Use these methods without getters, and also throw the change event
   public set(update: T): void {
