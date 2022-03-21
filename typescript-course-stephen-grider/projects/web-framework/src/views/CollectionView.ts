@@ -4,6 +4,7 @@ import { Collection } from '../models/Collection';
 export abstract class CollectionView<T, K> {
   constructor(public parent: Element, public collection: Collection<T, K>) {}
 
+  // This will render a single item from the below loop
   abstract renderItem(model: T, itemParent: Element): void;
 
   render(): void {
