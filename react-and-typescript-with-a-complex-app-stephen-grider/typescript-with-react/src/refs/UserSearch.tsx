@@ -1,19 +1,17 @@
-import { FC, useState } from 'react';
-
-interface User {
-  name: string;
-  age: number;
-}
-
-const users: User[] = [
-  { name: 'umer', age: 21 },
-  { name: 'kang', age: 25 },
-  { name: 'gulzar', age: 51 },
-];
+import { FC, useState, useRef, useEffect } from 'react';
+import { User, users } from '../App';
 
 const UserSearch: FC = () => {
+  // We have to initialize it as null first, because we might not apply it anywhere
+  const inputRef = useRef<HTMLInputElement | null>(null);
   const [search, setSearch] = useState('');
   const [user, setUser] = useState<User | undefined>(undefined);
+
+  useEffect(() => {
+    // When component render on screen focus on the input
+    if (!inputRef.current) return;
+    inputRef.current.focus();
+  }, []);
 
   const onClickButton = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -32,7 +30,12 @@ const UserSearch: FC = () => {
   return (
     <div>
       <h1>User Search</h1>
-      <input type="text" value={search} onChange={onChangeInput} />
+      <input
+        type="text"
+        value={search}
+        onChange={onChangeInput}
+        ref={inputRef}
+      />
       <button onClick={onClickButton}>Find User</button>
       {user && (
         <div>
