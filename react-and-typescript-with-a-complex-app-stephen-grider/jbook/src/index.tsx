@@ -1,8 +1,13 @@
+import 'bulmaswatch/superhero/bulmaswatch.min.css';
 import * as esbuild from 'esbuild-wasm';
 import { useState, useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
+
 import { fetchPlugin } from './plugins/fetch-plugin';
 import { unpkgPathPlugin } from './plugins/unpkg-path-plugin';
+
+// Components
+import CodeEditor from './components/code-editor';
 
 const App = () => {
   const serviceRef = useRef<esbuild.Service | null>(null);
@@ -89,6 +94,7 @@ const App = () => {
 
   return (
     <div>
+      <CodeEditor initialValue="" onChange={value => setInput(value)} />
       <textarea
         value={input}
         onChange={e => setInput(e.target.value)}
