@@ -1,4 +1,4 @@
-import './code-editor.css';
+import '../styles/code-editor.css';
 import { FC, useRef } from 'react';
 import { editor } from 'monaco-editor';
 import MonacoEditor, { EditorDidMount } from '@monaco-editor/react';
@@ -62,7 +62,7 @@ const CodeEditor: FC<CodeEditorProps> = ({ initialValue, onChange }) => {
       <MonacoEditor
         editorDidMount={onEditorDidMount}
         theme="dark"
-        height="500px"
+        height="100%"
         language="javascript"
         // This value is just initial value, this is not used after that (in textarea it is also used after that)
         value={initialValue}
@@ -73,7 +73,7 @@ const CodeEditor: FC<CodeEditorProps> = ({ initialValue, onChange }) => {
           showUnused: false,
           folding: false,
           lineNumbersMinChars: 3,
-          fontSize: 16,
+          fontSize: 18,
           fontWeight: '600',
           scrollBeyondLastLine: false,
           fontFamily: 'jetBrains Mono, Consolas',
