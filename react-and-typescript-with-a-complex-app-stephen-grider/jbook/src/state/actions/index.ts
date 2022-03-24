@@ -18,8 +18,8 @@ export interface DeleteCellAction {
   payload: string;
 }
 
-export interface InsertCellBeforeAction {
-  type: ActionType.INSERT_CELL_BEFORE;
+export interface InsertCellAfterAction {
+  type: ActionType.INSERT_CELL_AFTER;
   payload: {
     // To which cell we want to insert before
     // If it is null, add it to the end of state.order
@@ -42,5 +42,5 @@ export interface UpdateCellAction {
 export type Actions =
   | MoveCellAction
   | DeleteCellAction
-  | InsertCellBeforeAction
+  | InsertCellAfterAction
   | UpdateCellAction;

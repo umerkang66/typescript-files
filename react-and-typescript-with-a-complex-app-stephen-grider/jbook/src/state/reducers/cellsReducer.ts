@@ -54,7 +54,7 @@ const cellsReducer = produce(
         state.order[targetIndex] = temp;
         return state;
 
-      case ActionType.INSERT_CELL_BEFORE:
+      case ActionType.INSERT_CELL_AFTER:
         // Create new cell
         const cell: CellInterface = {
           content: '',
@@ -72,10 +72,10 @@ const cellsReducer = produce(
 
         // If found index is -1, add the new cell at the end of array
         if (foundIndex === -1) {
-          state.order.push(cell.id);
+          state.order.unshift(cell.id);
         } else {
           // Add before id that is provided in action.payload
-          state.order.splice(foundIndex, 0, cell.id);
+          state.order.splice(foundIndex + 1, 0, cell.id);
         }
         return state;
 
