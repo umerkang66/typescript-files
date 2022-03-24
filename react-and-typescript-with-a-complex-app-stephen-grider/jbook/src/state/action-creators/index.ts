@@ -1,12 +1,19 @@
+import { Dispatch } from 'redux';
 import { ActionType } from '../action-types';
 import {
   UpdateCellAction,
   MoveCellAction,
   DeleteCellAction,
   InsertCellAfterAction,
+  BundleStartAction,
+  BundleCompleteAction,
   Direction,
+  Actions,
 } from '../actions';
 import { CellTypes } from '../CellInterface';
+
+// BUNDLER
+import bundler from '../../bundler';
 
 // ACTION_CREATORS
 export const updateCell = (id: string, content: string): UpdateCellAction => {
@@ -45,5 +52,33 @@ export const insertCellAfter = (
       // What type of cell should be inserted, 'code' or 'text'
       type,
     },
+  };
+};
+
+export const bundleCode = (cellId: string, input: string) => {
+  return async (dispatch: Dispatch<Actions>) => {
+    // Dispatch the start bundle action creator
+    // Provide generic type was not necessary because we already provide it in Dispatch<>
+    dispatch<BundleStartAction>({
+      type: ActionType.BUNDLE_START,
+      payload: {
+        cellId,
+      },
+    });
+
+    const result = await bundler(input);
+
+    // Dispatch the complete bundle action creator
+    // Provide generic type was not necessary because we already provide it in Dispatch<>
+    dispatch<BundleCompleteAction>({
+      type: ActionType.BUNDLE_COMPLETE,
+      payload: {
+        cellId,
+        bundle: {
+          code: result.code,
+          err: result.err,
+        },
+      },
+    });
   };
 };

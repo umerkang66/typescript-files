@@ -40,6 +40,8 @@ const bundler = async (rawCode: string): Promise<BundlerReturnType> => {
         // If there is global, replace it with window (variable not string)
         global: 'window',
       },
+      jsxFactory: '_React.createElement',
+      jsxFragment: '_React.Fragment',
     });
 
     // Build will transpile and bundle the files (bundle means to put all js files into one file)
