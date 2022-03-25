@@ -24,7 +24,7 @@ export const serve = (
     );
   } else {
     const packagePath = require.resolve(
-      '@js-note-umer/local-client/build/index.html'
+      '@jbook-umer/local-client/build/index.html'
     );
     app.use(express.static(path.dirname(packagePath)));
   }
