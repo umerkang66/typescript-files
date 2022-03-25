@@ -1,5 +1,5 @@
 import { ActionType } from '../action-types';
-import { CellTypes } from '../CellInterface';
+import { CellTypes, CellInterface } from '../CellInterface';
 
 export type Direction = 'up' | 'down';
 export interface MoveCellAction {
@@ -59,10 +59,35 @@ export interface BundleCompleteAction {
   };
 }
 
+export interface FetchCellsAction {
+  type: ActionType.FETCH_CELLS;
+}
+
+export interface FetchCellsCompleteAction {
+  type: ActionType.FETCH_CELLS_COMPLETE;
+  payload: CellInterface[];
+}
+
+export interface FetchCellsErrorAction {
+  type: ActionType.FETCH_CELLS_ERROR;
+  // This payload will be error string
+  payload: string;
+}
+
+export interface SaveCellErrorAction {
+  type: ActionType.SAVE_CELLS_ERROR;
+  // This payload will be error string
+  payload: string;
+}
+
 export type Actions =
   | MoveCellAction
   | DeleteCellAction
   | InsertCellAfterAction
   | UpdateCellAction
   | BundleStartAction
-  | BundleCompleteAction;
+  | BundleCompleteAction
+  | FetchCellsAction
+  | FetchCellsCompleteAction
+  | FetchCellsErrorAction
+  | SaveCellErrorAction;

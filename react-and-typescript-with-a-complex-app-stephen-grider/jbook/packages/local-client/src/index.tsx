@@ -22,3 +22,10 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 );
+
+// lerna init
+// lerna add typescript --dev --scope=local-api
+// lerna add commander --scope=cli
+// lerna add local-api --scope=cli
+// Execute the start scripts in each different packages
+// lerna run start --parallel

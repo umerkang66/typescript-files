@@ -1,4 +1,6 @@
 import { Dispatch } from 'redux';
+import axios from 'axios';
+
 import { ActionType } from '../action-types';
 import {
   UpdateCellAction,
@@ -7,13 +9,18 @@ import {
   InsertCellAfterAction,
   BundleStartAction,
   BundleCompleteAction,
+  FetchCellsAction,
+  FetchCellsCompleteAction,
+  FetchCellsErrorAction,
+  SaveCellErrorAction,
   Direction,
   Actions,
 } from '../actions';
-import { CellTypes } from '../CellInterface';
+import { CellTypes, CellInterface } from '../CellInterface';
 
 // BUNDLER
 import bundler from '../../bundler';
+import { RootState } from '../reducers';
 
 // ACTION_CREATORS
 export const updateCell = (id: string, content: string): UpdateCellAction => {
@@ -80,5 +87,45 @@ export const bundleCode = (cellId: string, input: string) => {
         },
       },
     });
+  };
+};
+
+export const fetchCells = () => {
+  return async (dispatch: Dispatch<Actions>) => {
+    // Provide generic type was not necessary because we already provide it in Dispatch<>
+    dispatch<FetchCellsAction>({ type: ActionType.FETCH_CELLS });
+
+    try {
+      const { data }: { data: CellInterface[] } = await axios.get('/cells');
+
+      dispatch<FetchCellsCompleteAction>({
+        type: ActionType.FETCH_CELLS_COMPLETE,
+        payload: data,
+      });
+    } catch (err: any) {
+      dispatch<FetchCellsErrorAction>({
+        type: ActionType.FETCH_CELLS_ERROR,
+        payload: err.message,
+      });
+    }
+  };
+};
+
+export const saveCells = () => {
+  return async (dispatch: Dispatch<Actions>, getState: () => RootState) => {
+    const {
+      cells: { data, order },
+    } = getState();
+
+    const cells = order.map(cellId => data[cellId]);
+
+    try {
+      await axios.post('/cells', { cells });
+    } catch (err: any) {
+      dispatch<SaveCellErrorAction>({
+        type: ActionType.SAVE_CELLS_ERROR,
+        payload: err.message,
+      });
+    }
   };
 };
