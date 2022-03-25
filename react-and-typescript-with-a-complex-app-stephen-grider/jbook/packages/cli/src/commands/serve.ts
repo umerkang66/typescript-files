@@ -5,7 +5,7 @@ import { serve } from '@js-note-umer/local-api';
 const isProduction = process.env.NODE_ENV === 'production';
 
 export const serveCommand = new Command()
-  // We want to watch for user running the serve command, [filename] means that there can be an optional value, [] means optional value, <> means required value
+  // We want to watch for user running the serve command, [filename] means that there can be an optional value, [] means optional value, <> means required  value
   .command('serve [filename]')
   .description('Open a file for editing')
   // Third argument is default value
