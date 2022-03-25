@@ -28,4 +28,4 @@ ReactDOM.render(
 // lerna add commander --scope=cli
 // lerna add local-api --scope=cli
 // Execute the start scripts in each different packages
-// lerna run start --parallel
+// lerna run start  --parallel
