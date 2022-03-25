@@ -1,6 +1,6 @@
 {
-  "name": "js-note-umer",
-  "version": "2.0.1",
+  "name": "jbook-umer",
+  "version": "1.0.0",
   "description": "",
   "bin": "dist/index.js",
   "publishConfig": {
@@ -17,10 +17,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@js-note-umer/local-client": "^2.0.0"
+    "@jbook-umer/local-client": "^1.0.0"
   },
   "devDependencies": {
-    "@js-note-umer/local-api": "^2.0.0",
+    "@jbook-umer/local-api": "^1.0.0",
     "@types/node": "^17.0.23",
     "commander": "^9.1.0",
     "esbuild": "0.8.26",
