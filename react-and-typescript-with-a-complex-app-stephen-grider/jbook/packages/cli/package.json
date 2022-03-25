@@ -1,6 +1,6 @@
 {
   "name": "js-note-umer",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "",
   "bin": "dist/index.js",
   "publishConfig": {
