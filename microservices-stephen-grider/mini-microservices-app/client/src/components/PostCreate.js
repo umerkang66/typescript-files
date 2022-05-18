@@ -1,15 +1,13 @@
 import { useState } from 'react';
 import axios from 'axios';
 
-const PostCreate = ({ posts, setPosts }) => {
+const PostCreate = () => {
   const [title, setTitle] = useState('');
 
   const onSubmitHandler = async e => {
     e.preventDefault();
 
-    const res = await axios.post('http://localhost:4000/posts', { title });
-
-    setPosts({ ...posts, [res.data.id]: res.data });
+    await axios.post('http://localhost:4000/posts', { title });
 
     setTitle('');
   };
