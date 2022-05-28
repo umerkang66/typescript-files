@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  # name of pod (object)
+  name: posts
+spec:
+  containers:
+    # name of container
+    - name: posts
+      # if we didn't apply version no. (it is "latest"), k8s will reach out to docker hub
+      image: ugulzar4512/posts:0.0.1

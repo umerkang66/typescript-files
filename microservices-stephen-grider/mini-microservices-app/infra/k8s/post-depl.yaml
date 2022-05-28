@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: posts-depl
+spec:
+  # number of pods we want to create
+  replicas: 1
+  selector:
+    # which pods this should manage, after master created them
+    matchLabels:
+      # find all the posts with label app:posts
+      app: posts
+  template:
+    # configuration of pods to create
+    metadata:
+      labels:
+        app: posts
+    spec:
+      containers:
+        - name: posts
+          image: ugulzar4512/posts:latest
+# push the image to docker hub then run:
+# "kubectl rollout restart deployment posts-depl"
+# now whenever we will run the upper command, k8s will go to the docker hub and find the latest image there
