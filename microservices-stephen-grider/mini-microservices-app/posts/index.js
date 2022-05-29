@@ -14,14 +14,14 @@ app.get('/posts', (req, res) => {
   res.send(posts);
 });
 
-app.post('/posts', async (req, res) => {
+app.post('/posts/create', async (req, res) => {
   const id = randomBytes(4).toString('hex');
   const { title } = req.body;
   posts[id] = { id, title };
 
   // Emit an event
-  // const url = 'http://localhost:4005/events';
-  const url = 'http://event-bus:4005/events';
+  // url is coming from k8s cluster ip service
+  const url = 'http://event-bus-srv:4005/events';
 
   await axios.post(url, { type: 'PostCreated', data: { id, title } });
 

@@ -7,9 +7,7 @@ const CommentCreate = ({ postId }) => {
   const onSubmitHandler = async e => {
     e.preventDefault();
 
-    // const url = `http://localhost:4001/posts/${postId}/comments`;
-    const url = `http://comments:4001/posts/${postId}/comments`;
-
+    const url = `http://posts.com/posts/${postId}/comments`;
     await axios.post(url, { content });
 
     setContent('');

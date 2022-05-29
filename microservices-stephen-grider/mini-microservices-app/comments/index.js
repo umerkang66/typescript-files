@@ -24,8 +24,8 @@ app.post('/posts/:id/comments', async (req, res) => {
   commentsByPostId[postId] = comments;
 
   // Emit an event
-  // const url = 'http://localhost:4005/events';
-  const url = 'http://event-bus:4005/events';
+  // url is coming from k8s cluster ip service
+  const url = 'http://event-bus-srv:4005/events';
 
   await axios.post(url, {
     type: 'CommentCreated',
@@ -47,12 +47,8 @@ app.post('/events', async (req, res) => {
 
     comment.status = status;
 
-    // await axios.post('http://localhost:4005/events', {
-    //   type: 'CommentUpdated',
-    //   data: { id, postId, status, content },
-    // });
-
-    await axios.post('http://event-bus:4005/events', {
+    // url is coming from k8s cluster ip service
+    await axios.post('http://event-bus-srv:4005/events', {
       type: 'CommentUpdated',
       data: { id, postId, status, content },
     });

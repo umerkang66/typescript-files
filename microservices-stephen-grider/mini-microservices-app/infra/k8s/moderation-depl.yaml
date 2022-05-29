@@ -1,41 +1,41 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: posts-depl
+  name: moderation-depl
 spec:
   # number of pods we want to create
   replicas: 1
   selector:
     # which pods this should manage, after master created them
     matchLabels:
-      # find all the posts with label app:posts
-      app: posts
+      # find all the moderation with label app:moderation
+      app: moderation
   template:
     # configuration of pods to create
     metadata:
       labels:
-        app: posts
+        app: moderation
     spec:
       containers:
-        - name: posts
-          image: ugulzar4512/mini-posts:latest
+        - name: moderation
+          image: ugulzar4512/mini-moderation:latest
 # push the image to docker hub then run:
-# "kubectl rollout restart deployment posts-depl"
+# "kubectl rollout restart deployment moderation-depl"
 # now whenever we will run the upper command, k8s will go to the docker hub and find the latest image there
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: posts-clusterip-srv
+  name: moderation-srv
 spec:
   selector:
-    app: posts
+    app: moderation
   # optional: if we didn't specify any type, k8s will automatically create ClusterIP
   type: ClusterIP
   ports:
-    - name: posts
+    - name: moderation
       protocol: TCP
       # ClusterIP itself has a port
-      port: 4000
+      port: 4003
       # container port
-      targetPort: 4000
+      targetPort: 4003
