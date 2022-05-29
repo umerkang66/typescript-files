@@ -1,0 +1,21 @@
+version: '3'
+services:
+  nginx:
+    depends_on:
+      - client
+    restart: always
+    build: ./nginx
+    ports:
+      - '3050:80'
+  client:
+    build: ./client
+  posts:
+    build: ./posts
+  comments:
+    build: ./comments
+  moderation:
+    build: ./moderation
+  query:
+    build: ./query
+  event-bus:
+    build: ./event-bus

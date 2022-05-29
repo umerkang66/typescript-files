@@ -18,7 +18,24 @@ spec:
     spec:
       containers:
         - name: posts
-          image: ugulzar4512/posts:latest
+          image: ugulzar4512/mini-posts:latest
 # push the image to docker hub then run:
 # "kubectl rollout restart deployment posts-depl"
 # now whenever we will run the upper command, k8s will go to the docker hub and find the latest image there
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: posts-srv
+spec:
+  selector:
+    app: posts
+  # optional: if we didn't specify any type, k8s will automatically create ClusterIP
+  type: ClusterIP
+  ports:
+    - name: posts
+      protocol: TCP
+      # ClusterIP itself has a port
+      port: 4000
+      # container port
+      targetPort: 4000

@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: event-bus-depl
+spec:
+  # number of pods we want to create
+  replicas: 1
+  selector:
+    # which pods this should manage, after master created them
+    matchLabels:
+      # find all the event-bus with label app:event-bus
+      app: event-bus
+  template:
+    # configuration of pods to create
+    metadata:
+      labels:
+        app: event-bus
+    spec:
+      containers:
+        - name: event-bus
+          image: ugulzar4512/mini-event-bus:latest
+# push the image to docker hub then run:
+# "kubectl rollout restart deployment event-bus-depl"
+# now whenever we will run the upper command, k8s will go to the docker hub and find the latest image there
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: event-bus-srv
+spec:
+  selector:
+    app: event-bus
+  # optional: if we didn't specify any type, k8s will automatically create ClusterIP
+  type: ClusterIP
+  ports:
+    - name: event-bus
+      protocol: TCP
+      # ClusterIP itself has a port
+      port: 4005
+      # container port
+      targetPort: 4005
