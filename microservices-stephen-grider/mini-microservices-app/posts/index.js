@@ -22,7 +22,6 @@ app.post('/posts/create', async (req, res) => {
   // Emit an event
   // url is coming from k8s cluster ip service
   const url = 'http://event-bus-srv:4005/events';
-
   await axios.post(url, { type: 'PostCreated', data: { id, title } });
 
   res.status(201).send(posts[id]);
