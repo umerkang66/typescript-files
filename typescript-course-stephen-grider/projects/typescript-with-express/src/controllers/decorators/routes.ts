@@ -8,7 +8,7 @@ import { RouteHandlerDescriptor } from './RouteHandlerDescriptor';
 function routeBinder(method: string) {
   return function (path: string) {
     return function (target: any, key: string, desc: RouteHandlerDescriptor) {
-      // Target is prototype, and target[key] is actually method to which this decorator is attached to
+      // TARGET is prototype of class (that has all the methods), KEY is method name and target[key] is actually method of the class (or function) to which this decorator is attached to
 
       Reflect.defineMetadata(MetaDataKeys.path, path, target, key);
       Reflect.defineMetadata(MetaDataKeys.method, method, target, key);
