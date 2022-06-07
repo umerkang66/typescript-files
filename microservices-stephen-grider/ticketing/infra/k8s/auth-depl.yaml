@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-depl
+spec:
+  replicas: 1
+  # find all the pods, that are labeled with "app: auth"
+  selector:
+    matchLabels:
+      app: auth
+  # tell the k8s master, to create the pods with these configuration
+  template:
+    metadata:
+      # define the label so other k8s objects can access it
+      labels:
+        app: auth
+    spec:
+      containers:
+        # name is just for logging purposes
+        - name: auth
+          image: ugulzar4512/auth
+---
+# by default this will create clusterIP service, if we didn't specify any type
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-srv
+spec:
+  # find all the pods that are labeled with "app: auth"
+  selector:
+    app: auth
+  type: ClusterIP
+  ports:
+    - name: auth
+      protocol: TCP
+      # clusterIP itself has a port
+      port: 3000
+      # container port
+      targetPort: 3000
