@@ -19,7 +19,9 @@ router.post(
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       // if there are errors
-      return res.status(400).send(errors.array());
+      // automatically caught up by express error handling middleware
+      // if it is async function, this will also be caught in global error handling middleware
+      throw new Error('Invalid email or password');
     }
 
     const { email, password } = req.body;
