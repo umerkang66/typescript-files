@@ -2,3 +2,5 @@ HOST FILE: Mac/Linux: /etc/hosts
 HOST FILE: Windows: C:\Windows\System32\Drivers\etc\hosts
 thisisunsafe
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.2.0/deploy/static/provider/cloud/deploy.yaml
+
+ticketing.dev ip address is coming from loadBalancer networking service of gcp, created by ingress-nginx
