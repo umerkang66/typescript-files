@@ -35,5 +35,5 @@ spec:
       protocol: TCP
       # clusterIP itself has a port
       port: 3000
-      # container port
+      # container port (pod port)
       targetPort: 3000
