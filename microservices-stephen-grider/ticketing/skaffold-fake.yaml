@@ -6,11 +6,11 @@ deploy:
     manifests:
       - ./infra/k8s/*
 build:
-  googleCloudBuild:
-    projectId: ticketing-dev-353110
+  local:
+    push: false
   artifacts:
-    # image is build by google cloud build, this name is always the same, except the last is folder name
-    - image: us.gcr.io/ticketing-dev-353110/auth
+    # build the images, if source code changes, (not synced), update the images if (synced) source code changes
+    - image: ugulzar4512/auth
       # folder name of auth service
       context: auth
       docker:

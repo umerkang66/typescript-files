@@ -18,7 +18,7 @@ spec:
       containers:
         # name is just for logging purposes
         - name: auth
-          image: ugulzar4512/auth
+          image: us.gcr.io/ticketing-dev-353110/auth
 ---
 # by default this will create clusterIP service, if we didn't specify any type
 apiVersion: v1
