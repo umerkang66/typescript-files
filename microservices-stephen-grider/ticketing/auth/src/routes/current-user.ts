@@ -1,8 +1,12 @@
 import express from 'express';
+import { currentUser } from '../middlewares/current-user';
+
 const router = express.Router();
 
-router.get('/api/users/currentuser', (req, res) => {
-  res.send('Hi there!');
+// this is for client to figure out that if user is signed in or not, by sending cookie, that has json web token
+router.get('/api/users/currentuser', currentUser, (req, res) => {
+  // whenever we didn't specify the status, the default is 200
+  res.send({ currentUser: req.currentUser || null });
 });
 
-export { router as currentuserRouter };
+export { router as currentUserRouter };

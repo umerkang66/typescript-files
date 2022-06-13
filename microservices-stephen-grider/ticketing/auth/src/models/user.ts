@@ -18,16 +18,32 @@ interface UserDocument extends mongoose.Document {
   password: string;
 }
 
-const userSchema = new mongoose.Schema({
-  email: {
-    type: String,
-    required: true,
+const userSchema = new mongoose.Schema(
+  {
+    email: {
+      type: String,
+      required: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
   },
-  password: {
-    type: String,
-    required: true,
-  },
-});
+  {
+    toJSON: {
+      // whenever JSON.stringify() will be called on document, this object will use this configs
+      transform(doc, ret) {
+        // after converting into plain obj, the object that is returned is "ret", we can modify that ret, it doesn't change the document in mongodb, but rather when it is turned into JSON by express
+        ret.id = ret._id;
+
+        delete ret._id;
+        delete ret.__v;
+        delete ret.password;
+        // "or" ret.password = undefined
+      },
+    },
+  }
+);
 
 // pre document middlewares
 userSchema.pre('save', async function (done) {
