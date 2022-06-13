@@ -24,7 +24,6 @@ export const currentUser = (
   if (!req.session || !req.session.jwt) {
     return next();
   }
-
   // if token is messed with, verify will throw an error
   try {
     // return all of the information that is in the payload

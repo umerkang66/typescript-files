@@ -2,7 +2,13 @@ jest.setTimeout(100000);
 
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
+import request from 'supertest';
+
 import { app } from '../app';
+
+declare global {
+  var getAuthCookie: () => Promise<string[]>;
+}
 
 // Before all our different test startups (different test files), we're going to create a new instance of this mongo memory server
 
@@ -28,3 +34,16 @@ afterAll(async () => {
   await mongoose.connection.close();
   await mongo.stop();
 });
+
+global.getAuthCookie = async () => {
+  const email = 'test@test.com';
+  const password = 'password';
+
+  const res = await request(app)
+    .post('/api/users/signup')
+    .send({ email, password })
+    .expect(201);
+
+  const cookie = res.get('Set-Cookie');
+  return cookie;
+};
