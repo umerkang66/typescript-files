@@ -17,9 +17,11 @@ const app = express();
 app.set('trust proxy', true);
 app.use(express.json());
 
+// jest automatically set the env to 'test'
+const isSecure = process.env.NODE_ENV !== 'test';
 // "signed": don't encrypt this
 // "secure": only set cookies on https
-app.use(cookieSession({ signed: false, secure: true }));
+app.use(cookieSession({ signed: false, secure: isSecure }));
 
 // Routes
 app.use(currentUserRouter);
