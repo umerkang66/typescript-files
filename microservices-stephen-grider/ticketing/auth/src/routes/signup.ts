@@ -11,12 +11,19 @@ const router = express.Router();
 const validator = [
   body('email')
     .isEmail()
-    .withMessage('The email that you have provided must be valid'),
+    .withMessage('The email that you have provided must be valid.'),
   body('password')
     .trim()
     .isLength({ min: 4, max: 20 })
-    .withMessage('Password must be between 4 and 20 characters'),
+    .withMessage('Password must be between 4 and 20 characters.'),
 ];
+
+
+
+
+
+
+
 
 router.post(
   '/api/users/signup',
