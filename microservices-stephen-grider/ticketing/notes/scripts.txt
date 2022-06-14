@@ -8,4 +8,4 @@ ticketing.dev ip address is coming from loadBalancer networking service of gcp, 
 # generic secret means this is just all kind of information generic secret
 
 kubectl create secret generic <secret_name> --from-literal=<key>=<value>
-kubectl create secret generic jwt-secret --from-literal=jwt=umer_kang_safe_secret
+kubectl create secret generic jwt-secret --from-literal=JWT_KEY=umer_kang_safe_secret
