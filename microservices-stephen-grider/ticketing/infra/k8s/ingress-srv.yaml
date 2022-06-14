@@ -19,6 +19,13 @@ spec:
                 port:
                   # this is the port of "auth-srv" cluster ip service, which sends the requests to container port 3000
                   number: 3000
+          - path: /api/tickets/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: tickets-srv
+                port:
+                  number: 3000
           # this is like a catch all routes, client should be at the last
           - path: /?(.*)
             pathType: Prefix

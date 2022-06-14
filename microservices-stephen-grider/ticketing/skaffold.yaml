@@ -31,3 +31,13 @@ build:
         manual:
           - src: '**/*.js'
             dest: .
+    - image: us.gcr.io/ticketing-dev-353110/tickets
+      # folder name of tickets service
+      context: tickets
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        # how to handle image, if any file changes
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
