@@ -31,6 +31,15 @@ spec:
                   key: JWT_KEY
             - name: MONGO_URI
               value: 'mongodb://tickets-mongo-srv:27017/tickets'
+            - name: NATS_URL
+              value: 'http://nats-srv:4222'
+            - name: NATS_CLUSTER_ID
+              value: ticketing
+            - name: NATS_CLIENT_ID
+              # value is same as name of tickets pod
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
 ---
 # by default this will create clusterIP service, if we didn't specify any type
 apiVersion: v1

@@ -18,9 +18,6 @@ export abstract class Listener<T extends Event> {
     // when we create a subscription name, nats internally is going to create a record of subscription, and it will see if the events previously has been sent and acknowledged by this service
 
     // if event fail by listener, we have to reprocess it, it should be added on the listener
-
-    // DURABLE_NAME option requires if queue group is created in the "nats s. server".
-    // queue-group creates reference of this listener on the "nats s. server"
     return this.client
       .subscriptionOptions()
       .setDeliverAllAvailable()

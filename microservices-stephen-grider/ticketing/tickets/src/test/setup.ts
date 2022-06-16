@@ -8,8 +8,9 @@ declare global {
   var getAuthCookie: () => string[];
 }
 
-// Before all our different test startups (different test files), we're going to create a new instance of this mongo memory server
+jest.mock('../nats-wrapper');
 
+// Before all our different test startups (different test files), we're going to create a new instance of this mongo memory server
 let mongo: MongoMemoryServer;
 
 beforeAll(async () => {
@@ -21,6 +22,8 @@ beforeAll(async () => {
 });
 
 beforeEach(async () => {
+  // reinitialize the every mock functions before every test
+  jest.clearAllMocks();
   const collections = await mongoose.connection.db.collections();
 
   for (let collection of collections) {
