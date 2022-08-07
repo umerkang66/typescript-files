@@ -1,5 +1,0 @@
-npm login
-npm publish --access public
-
-// update the code run "npm run pub"
-// npm update @ticketing-umer/common
