@@ -1,6 +1,6 @@
 import { createContext, PropsWithChildren, useState } from 'react';
 
-const QueryContext = createContext({
+export const QueryContext = createContext({
   query: '',
   setSearchQuery: (query: string) => {},
 });
@@ -19,5 +19,3 @@ export function QueryContextProvider({ children }: PropsWithChildren) {
     </QueryContext.Provider>
   );
 }
-
-export default QueryContext;

@@ -1,2 +1,2 @@
 export * from './use-debounce';
-export * from './use-query-context';
+export * from './use-contexts';
