@@ -5,7 +5,7 @@ import { MetaDataKeys } from './MetaDataKeys';
 import { RouteHandlerDescriptor } from './RouteHandlerDescriptor';
 
 // method can be "get", "post", "patch", "delete"
-function routeBinder(method: string) {
+function routeBinder(method: Methods) {
   return function (path: string) {
     return function (target: any, key: string, desc: RouteHandlerDescriptor) {
       // TARGET is prototype of class (that has all the methods), KEY is method name and target[key] is actually method of the class (or function) to which this decorator is attached to
