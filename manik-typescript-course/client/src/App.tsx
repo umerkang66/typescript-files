@@ -1,10 +1,10 @@
 import { CssBaseline, ThemeProvider } from '@mui/material';
-import React, { FC, ReactElement } from 'react';
+import React from 'react';
 
 import { Dashboard } from './pages/dashboard/dashboard';
 import { customTheme } from './theme/customTheme';
 
-const App: FC = (): ReactElement => {
+const App: React.FC = (): React.ReactElement => {
   return (
     <ThemeProvider theme={customTheme}>
       <CssBaseline />

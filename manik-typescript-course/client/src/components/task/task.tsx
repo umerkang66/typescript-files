@@ -1,4 +1,4 @@
-import React, { FC, ReactElement } from 'react';
+import React from 'react';
 
 import { Box } from '@mui/material';
 import { ITask } from './interfaces/ITask';
@@ -10,17 +10,16 @@ import { TaskFooter } from './_taskFooter';
 import { TaskHeader } from './_taskHeader';
 import { renderPriorityBorderColor } from './helpers/renderPriorityBorderColor';
 
-export const Task: FC<ITask> = (props): ReactElement => {
-  //  Destructure props
-  const {
-    title = 'Test Title',
-    date = new Date(),
-    description = 'Lorem ipsum dolor sit amet',
-    priority = Priority.normal,
-    status = Status.completed,
-    onStatusChange = (e) => console.log(e),
-    onClick = (e) => console.log(e),
-  } = props;
+export const Task: React.FC<ITask> = ({
+  title = 'Test Title',
+  date = new Date(),
+  description = 'Lorem ipsum dolor sit amet',
+  priority = Priority.normal,
+  status = Status.completed,
+  onStatusChange = e => console.log(e),
+  onClick = e => console.log(e),
+}): React.ReactElement => {
+  console.log(status);
 
   return (
     <Box
